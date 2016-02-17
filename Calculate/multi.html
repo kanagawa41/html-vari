@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Enjoy calculate</title>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        <!-- #contents {
+            max-width: 900px;
+            max-height: 350px;
+            width: 90%;
+            height: 40%;
+            text-align: center;
+        }
+        
+        #multiplication_content {}
+        
+        #multiplication_content .settings {
+            padding-top: 40px;
+        }
+        
+        #multiplication_content .culculate_area {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        #multiplication_content .no-emphasis {
+            font-size: 1em;
+        }
+        
+        #multiplication_content .emphasis-1 {
+            font-size: 3.5em;
+        }
+        
+        #multiplication_content .emphasis-2 {
+            font-size: 5.5em;
+        }
+        
+        #multiplication_content .emphasis-3 {
+            font-size: 8em;
+        }
+        
+        #multiplication_content .digit-3 {
+            width: 100%;
+        }
+        
+        #multiplication_content .number {
+            background-color: rgba(0, 0, 255, 0);
+            color: yellow;
+            border: 0px;
+            padding: 0px;
+            margin: 0px;
+            vertical-align: middle;
+            text-align: center;
+        }
+        
+        #multiplication_content .operator {
+            color: white;
+            font-size: 1.5em;
+            vertical-align: middle;
+            padding: 0 15px 0 15px;
+        }
+        
+        #multiplication_content .select_disable {
+            background-color: rgba(0, 0, 255, 0);
+        }
+        
+        -->
+    </style>
+</head>
+
+<body>
+    <div id="contents">
+        <ul class="nav nav-tabs">
+            <li><a href="#" onclick="multiTabClick()">multiplication</a></li>
+            <li><a href="#" onclick="powerTabClick()">power</a></li>
+        </ul>
+        <div id="content-top"></div>
+        <div id="multiplication_content">
+            <p>
+                <label id="number_of_steps">Selected Type!!</label>
+            </p>
+            <table class="culculate_area">
+                <tr valign="middle">
+                    <td>
+                        <div id="number1" class="number digit-3">000</div>
+                    </td>
+                    <td>
+                        <div class="operator">×</div>
+                    </td>
+                    <td>
+                        <div id="number2" class="number digit-3">000</div>
+                    </td>
+                    <td>
+                        <div class="operator">＝</div>
+                    </td>
+                    <td>
+                        <div id="result" class="number digit-3">000</div>
+                    </td>
+                </tr>
+            </table>
+            <div class="progress">
+                <div id="calculate-progress" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"
+                style="width: 0%">
+                    <span class="sr-only"></span>
+                </div>
+            </div>
+
+            <p>
+                <button id="control_btn" class="btn btn-success btn-block" onclick="ButtonTypeJudge()">Start</button>
+            </p>
+            <button type="button" id="detail-btn" class="btn btn-secondary btn-block" data-toggle="collapse" data-target="#detail-collapse">Detail settings</button>
+            <div id="detail-collapse" class="settings collapse">
+                <p>
+                    <select id="target_step" class="form-control">
+                        <option value="all">1~19 paragraph</option>
+                        <option value="eleven_for_but_no_ten" selected>11~19 paragraph
+                        </option>
+                        <option value="test">Test</option>
+                    </select>
+                </p>
+                <p>
+                    <select id="display_second" class="form-control">
+                        <option value="2000">2 second</option>
+                        <option value="1500" selected>1.5 second</option>
+                        <option value="1000">1 second</option>
+                        <option value="500">0.5 second</option>
+                        <option value="300">0.3 second</option>
+                    </select>
+                </p>
+                <p>
+                    <select id="char_mode" class="form-control">
+                        <option value="flat">Flat</option>
+                        <option value="dinamic-emphasis" selected>Dynamic only emphasis
+                        </option>
+                        <option value="emphasis">Emphasis</option>
+                    </select>
+                </p>
+            </div>
+        </div>
+        <div id="power_content">
+            <p>
+                <label id="number_of_steps">Selected Type!!</label>
+            </p>
+            <table class="culculate_area">
+                <tr valign="middle">
+                    <td>
+                        <div id="number1" class="number digit-3">000</div>
+                    </td>
+                    <td>
+                        <div class="operator">×</div>
+                    </td>
+                    <td>
+                        <div id="number2" class="number digit-3">000</div>
+                    </td>
+                    <td>
+                        <div class="operator">＝</div>
+                    </td>
+                    <td>
+                        <div id="result" class="number digit-3">000</div>
+                    </td>
+                </tr>
+            </table>
+            <div class="progress">
+                <div id="calculate-progress" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"
+                style="width: 0%">
+                    <span class="sr-only"></span>
+                </div>
+            </div>
+
+            <p>
+                <button id="control_btn" class="btn btn-success btn-block" onclick="ButtonTypeJudge()">Start</button>
+            </p>
+            <button type="button" id="detail-btn" class="btn btn-secondary btn-block" data-toggle="collapse" data-target="#detail-collapse">Detail settings</button>
+            <div id="detail-collapse" class="settings collapse">
+                <p>
+                    <select id="target_step" class="form-control">
+                    </select>
+                </p>
+                <p>
+                    <select id="display_second" class="form-control">
+                    </select>
+                </p>
+                <p>
+                    <select id="char_mode" class="form-control">
+                    </select>
+                </p>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        commonInit();
+
+        function commonInit() {
+            jQuery.fn.center = function() {
+                this.css("position", "absolute");
+                this.css("top", ($(window).height() - this.height()) / 2
+                        + $(window).scrollTop() + "px");
+                this.css("left", ($(window).width() - this.width()) / 2
+                        + $(window).scrollLeft() + "px");
+                return this;
+            };
+            $("#contents").center();
+
+            multiInit();
+
+            $('#power_content').css('visibility', 'hidden');
+            $('#multiplication_content').css('visibility', 'visible');
+        }
+
+        function multiInit() {
+            $('#content-top').after($('#multiplication_content'));
+
+            charSetting();
+
+            multiReset();
+
+            $('#detail-collapse').collapse('show');
+        }
+
+        function powerInit() {
+            $('#content-top').after($('#power_content'));
+        }
+
+        function multiTabClick() {
+            multiInit();
+            $('#power_content').css('visibility', 'hidden');
+            $('#multiplication_content').css('visibility', 'visible');
+        }
+        function powerTabClick() {
+            powerInit();
+            $('#multiplication_content').css('visibility', 'hidden');
+            $('#power_content').css('visibility', 'visible');
+        }
+
+        function charSetting() {
+            $("select#char_mode").change(function() {
+                $("select#char_mode option:selected").each(function() {
+                    var mode = $(this).val();
+
+                    if (mode === 'flat') {
+                        changeCharEmpasis('#number1', 'emphasis-1');
+                        changeCharEmpasis('#number2', 'emphasis-1');
+                        changeCharEmpasis('#result', 'emphasis-1');
+                    } else if (mode === 'dinamic-emphasis') {
+                        changeCharEmpasis('#number1', 'emphasis-1');
+                        changeCharEmpasis('#number2', 'emphasis-2');
+                        changeCharEmpasis('#result', 'emphasis-2');
+                    } else if (mode === 'emphasis') {
+                        changeCharEmpasis('#number1', 'emphasis-1');
+                        changeCharEmpasis('#number2', 'emphasis-2');
+                        changeCharEmpasis('#result', 'emphasis-3');
+                    } else {
+                        alert('Fatal char init.');
+                    }
+                });
+            }).change();
+        }
+
+        function changeCharEmpasis(idOrClass, addClass) {
+            $(idOrClass).removeClass('no-emphasis');
+            $(idOrClass).removeClass('emphasis-1');
+            $(idOrClass).removeClass('emphasis-2');
+            $(idOrClass).removeClass('emphasis-3');
+
+            $(idOrClass).addClass(addClass);
+        }
+
+        function makeSteps_(stepMin, stepMax, columnMin, columnMax) {
+            var gathers = [];
+            for (var i = stepMin - 1; i < stepMax; i++) {
+                for (var j = columnMin - 1; j < columnMax; j++) {
+                    var pair = [];
+                    pair.push((i + 1));
+                    pair.push((j + 1));
+
+                    gathers.push(pair);
+                }
+            }
+
+            return gathers;
+        }
+
+        function calculateStop() {
+            multiReset();
+        }
+
+        function multiReset() {
+            // important
+            clearTimeout('numberTimer()');
+
+            i = 0;
+            targetSteps = [];
+            displayKeepSecond = -1;
+
+            $('#number_of_steps').text('Selected Type!!');
+
+            $('.form-control').removeClass('select_disable');
+            $('#detail-btn').removeClass('select_disable');
+
+            $('#control_btn').text('START!');
+            type = 'start';
+        }
+
+        var type = 'start'; // or stop
+        function ButtonTypeJudge() {
+            if (type === 'start') {
+                calculateStart();
+            } else {
+                calculateStop();
+            }
+        }
+
+        function calculateStart() {
+            var targetStep = $('#target_step').val();
+
+            if (targetStep === 'all') {
+                targetSteps = makeSteps_(1, 19, 1, 19);
+            } else if (targetStep === 'eleven_for_but_no_ten') {
+                targetSteps = makeSteps_(11, 19, 11, 19);
+            } else if (targetStep === 'test') {
+                targetSteps = makeSteps_(1, 2, 1, 2);
+            } else {
+                alert("hasn't exist step was selected");
+                return;
+            }
+
+            i = 0;
+            displayKeepSecond = $('#display_second').val();
+
+            $('.form-control').addClass('select_disable');
+            $('#control_btn').text('STOP!');
+
+            type = 'stop';
+
+            $('#number1').text('000');
+            $('#number2').text('000');
+            $('#result').text('000');
+
+            $('#calculate-progress').attr('aria-valuemax', targetSteps.length);
+            $('#calculate-progress').attr('aria-valuenow', '0');
+            $('#calculate-progress').css('width', '0%');
+
+            $('#detail-btn').addClass('select_disable');
+            $('#detail-collapse').collapse('hide');
+
+            count = 3;
+            countdown();
+        }
+
+        var count = 3;
+        function countdown() {
+            if (count <= 0) {
+                // important
+                clearTimeout('countdown()');
+
+                $('#number_of_steps').text(
+                        targetSteps[i][0].toString() + ' paragraph');
+                numberTimer();
+                return;
+            }
+
+            $('#number_of_steps').text(count);
+
+            count--;
+            setTimeout('countdown()', 1000);
+        }
+
+        var i = 0;
+        var targetSteps = [];
+        var displayKeepSecond = -1;
+        function numberTimer() {
+            try {
+                var y = targetSteps[i][0];
+                var x = targetSteps[i][1];
+
+                $('#number1').text(spaceFill(y, 3));
+                $('#number2').text(spaceFill(x, 3));
+                $('#result').text(spaceFill((y * x), 3));
+
+                i++;
+
+                $('#calculate-progress').attr('aria-valuenow', i);
+                $('#calculate-progress').css('width',
+                        ((i / targetSteps.length) * 100) + '%');
+
+                if (i >= targetSteps.length) {
+                    multiReset();
+
+                    $('#number_of_steps').text('Finish!');
+                    return;
+                }
+
+                $('#number_of_steps').text(y.toString() + ' paragraph');
+
+                setTimeout('numberTimer()', displayKeepSecond);
+            } catch (e) {
+                //nothing
+            }
+        }
+
+        function spaceFill(target, digit) {
+            var different = digit - target.toString().length;
+            if (different <= 0) {
+                return target;
+            }
+
+            for (var i = 0; i < different; i++) {
+                target = '\u00a0' + target.toString();
+            }
+
+            return target;
+        }
+    </script>
+</body>
+
+</html>
