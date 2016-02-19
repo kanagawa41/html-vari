@@ -33,6 +33,16 @@
 					</td>
 				</tr>
 			</table>
+			<p>
+				<select id="xxx_step" class="form-control">
+					<option value="all">1~19 paragraph</option>
+					<option value="two_for" selected>2~19 paragraph</option>
+					<option value="eleven_for">12~19 paragraph</option>
+					<option value="choses">choses paragraph</option>
+					<option value="test">※Test※</option>
+				</select>
+			</p>
+			<div id="choses_paragraphs" class="form-group"></div>
 		</div>
 		<div id="power_content">
 			<table class="culculate_area">
@@ -74,58 +84,68 @@
             '#number_of_steps' : '1'
         }];
 
-        //intervalTest();
-        intervalTest2();
+        makeNumberCheckbox(2, 8, '#choses_paragraphs');
 
-        function intervalTest(){
-	        var countdownChanger = new TextIntervalChanger();
-
-	        countdownChanger
-	                .setEndThen(function() {
-	                    var textIntervalChanger = new TextIntervalChanger(
-	                            '#power_content');
-
-	                    textIntervalChanger.setEndThen(function() {
-	                        console.log('end');
-	                    });
-
-	                    textIntervalChanger.setEventBeforeThen(function(count) {
-	                        console.log('event before then count:' + count);
-	                    });
-
-	                    textIntervalChanger.setEventAfterThen(function(count) {
-	                        console.log('event after then count:' + count);
-	                    });
-
-	                    textIntervalChanger.start(makeSteps_(1, 2, 1, 2));
-	                });
-
-	        countdownChanger.start(testCountData);
-
-	        function makeSteps_(stepMin, stepMax, columnMin, columnMax) {
-	            var gathers = [];
-	            for (var i = stepMin - 1; i < stepMax; i++) {
-	                for (var j = columnMin - 1; j < columnMax; j++) {
-	                    gathers.push({
-	                        '#number1' : (i + 1),
-	                        '#number2' : (j + 1),
-	                        '#result' : (i + 1) * (j + 1)
-	                    });
-	                }
-	            }
-
-	            return gathers;
-	        }
+        function makeNumberCheckbox(min, max, element) {
+            var parent = $(element);
+            for (var i = min; i <= max; i++) {
+                parent
+                        .append('<label class="checkbox-inline"><input type="checkbox" value="' + i + '">'
+                                + i + '</label>');
+            }
         }
 
-        function intervalTest2(){
+        //intervalTest();
+        //intervalTest2();
+
+        function intervalTest() {
+            var countdownChanger = new TextIntervalChanger();
+
+            countdownChanger.setEndThen(function() {
+                var textIntervalChanger = new TextIntervalChanger(
+                        '#power_content');
+
+                textIntervalChanger.setEndThen(function() {
+                    console.log('end');
+                });
+
+                textIntervalChanger.setEventBeforeThen(function(count) {
+                    console.log('event before then count:' + count);
+                });
+
+                textIntervalChanger.setEventAfterThen(function(count) {
+                    console.log('event after then count:' + count);
+                });
+
+                textIntervalChanger.start(makeSteps_(1, 2, 1, 2));
+            });
+
+            countdownChanger.start(testCountData);
+
+            function makeSteps_(stepMin, stepMax, columnMin, columnMax) {
+                var gathers = [];
+                for (var i = stepMin - 1; i < stepMax; i++) {
+                    for (var j = columnMin - 1; j < columnMax; j++) {
+                        gathers.push({
+                            '#number1' : (i + 1),
+                            '#number2' : (j + 1),
+                            '#result' : (i + 1) * (j + 1)
+                        });
+                    }
+                }
+
+                return gathers;
+            }
+        }
+
+        function intervalTest2() {
             var ticker = new Ticker();
 
-            ticker.intervalFor(function(count){
+            ticker.intervalFor(function(count) {
                 console.log(count);
             }, 3);
 
-            ticker.run(function(){
+            ticker.run(function() {
                 console.log('finish');
             }, true);
         }

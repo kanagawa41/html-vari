@@ -2,6 +2,12 @@ function Ticker() {
     this.interval = 1000;
 }
 
+Ticker.prototype.then = function(funk, interval) {
+    this.intervalFunk = funk;
+    this.max = count;
+}
+
+
 Ticker.prototype.intervalFor = function(funk, count) {
     this.intervalFunk = funk;
     this.max = count;
