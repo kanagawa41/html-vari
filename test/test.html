@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="js/text-interval-changer.js"></script>
+<script src="js/ticker.js"></script>
+</head>
+<body>
+	<div id="contents">
+		<p>
+			<label id="number_of_steps">Selected Type!!</label>
+		</p>
+		<div id="multiplication_content">
+			<table class="culculate_area">
+				<tr valign="middle">
+					<td>
+						<div id="number1" class="number digit-3">000</div>
+					</td>
+					<td>
+						<div class="operator">×</div>
+					</td>
+					<td>
+						<div id="number2" class="number digit-3">000</div>
+					</td>
+					<td>
+						<div class="operator">＝</div>
+					</td>
+					<td>
+						<div id="result" class="number digit-3">000</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div id="power_content">
+			<table class="culculate_area">
+				<tr valign="middle">
+					<td>
+						<div id="number1" class="number digit-3">000</div>
+					</td>
+					<td>
+						<div class="operator">×</div>
+					</td>
+					<td>
+						<div id="number2" class="number digit-3">000</div>
+					</td>
+					<td>
+						<div class="operator">＝</div>
+					</td>
+					<td>
+						<div id="result" class="number digit-3">000</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+        var testData = [{
+            '#number1' : 'change1-1',
+            '#number2' : 'change1-2'
+        }, {
+            '#number1' : 'change2-1',
+            '#number2' : 'change2-2'
+        }];
+
+        var testCountData = [{
+            '#number_of_steps' : '3'
+        }, {
+            '#number_of_steps' : '2'
+        }, {
+            '#number_of_steps' : '1'
+        }];
+
+        //intervalTest();
+        intervalTest2();
+
+        function intervalTest(){
+	        var countdownChanger = new TextIntervalChanger();
+
+	        countdownChanger
+	                .setEndThen(function() {
+	                    var textIntervalChanger = new TextIntervalChanger(
+	                            '#power_content');
+
+	                    textIntervalChanger.setEndThen(function() {
+	                        console.log('end');
+	                    });
+
+	                    textIntervalChanger.setEventBeforeThen(function(count) {
+	                        console.log('event before then count:' + count);
+	                    });
+
+	                    textIntervalChanger.setEventAfterThen(function(count) {
+	                        console.log('event after then count:' + count);
+	                    });
+
+	                    textIntervalChanger.start(makeSteps_(1, 2, 1, 2));
+	                });
+
+	        countdownChanger.start(testCountData);
+
+	        function makeSteps_(stepMin, stepMax, columnMin, columnMax) {
+	            var gathers = [];
+	            for (var i = stepMin - 1; i < stepMax; i++) {
+	                for (var j = columnMin - 1; j < columnMax; j++) {
+	                    gathers.push({
+	                        '#number1' : (i + 1),
+	                        '#number2' : (j + 1),
+	                        '#result' : (i + 1) * (j + 1)
+	                    });
+	                }
+	            }
+
+	            return gathers;
+	        }
+        }
+
+        function intervalTest2(){
+            var ticker = new Ticker();
+
+            ticker.intervalFor(function(count){
+                console.log(count);
+            }, 3);
+
+            ticker.run(function(){
+                console.log('finish');
+            }, true);
+        }
+        //console.log(JSON.stringify(makeSteps_(1, 19, 1, 19)));
+    </script>
+</body>
+</html>
