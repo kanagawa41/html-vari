@@ -1,3 +1,20 @@
+/** what **/
+label.btn-default.active{
+    background-color:#007ba7;
+    color:#FFF
+}
+label.btn-default{
+    width:90%;border:1px solid #efefef;
+    margin:5px; 
+}
+#choses_paragraphs .btn span.glyphicon{
+    opacity: 0;
+}
+#choses_paragraphs .btn.active span.glyphicon {
+    opacity: 1;
+}
+
+/** base **/
 #contents {
     max-width: 900px;
     max-height: 350px;
@@ -55,7 +72,6 @@
 }
 
 #multiplication_content .collapse {
-    background-color: #DCDCDC;
 }
 
 #multiplication_content .checkbox-inline {
@@ -70,3 +86,6 @@
     background-color: rgba(0, 0, 255, 0);
 }
 
+#multiplication_content .disable-border {
+    border: 0px;
+}

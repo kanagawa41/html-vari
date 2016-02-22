@@ -2,109 +2,119 @@
 <html>
 
 <head>
-<meta charset="UTF-8">
-<title>Enjoy calculate</title>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap/bootstrap.min.js"></script>
-<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
-<script src="js/ticker.js"></script>
-<link href="css/multi.css" rel="stylesheet">
-</style>
+    <meta charset="UTF-8">
+    <title>Enjoy calculate</title>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <script src="js/bootstrap/bootstrap-switch.js"></script>
+    <link href="css/bootstrap/bootstrap-switch.css" rel="stylesheet">
+    <script src="js/ticker.js"></script>
+    <link href="css/multi.css" rel="stylesheet">
+    </style>
 </head>
 
 <body>
-	<div id="contents">
-		<div id="content-top"></div>
-		<div id="multiplication_content">
-			<p>
-				<label id="number_of_steps">Selected Type!!</label>
-			</p>
-			<table class="culculate_area">
-				<tr valign="middle">
-					<td>
-						<div id="number1" class="number digit-3">000</div>
-					</td>
-					<td>
-						<div class="operator">×</div>
-					</td>
-					<td>
-						<div id="number2" class="number digit-3">000</div>
-					</td>
-					<td>
-						<div class="operator">＝</div>
-					</td>
-					<td>
-						<div id="result" class="number digit-3">000</div>
-					</td>
-				</tr>
-			</table>
-			<div class="progress">
-				<div id="calculate-progress" class="progress-bar" role="progressbar"
-					aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"
-					style="width: 0%">
-					<span class="sr-only"></span>
-				</div>
-			</div>
-
-			<p>
-				<button id="control_btn" class="btn btn-success btn-block"
-					onclick="ButtonTypeJudge()">Start</button>
-			</p>
-			<button type="button" id="detail-btn"
-				class="btn btn-secondary btn-block" data-toggle="collapse"
-				data-target="#detail-collapse">Detail settings</button>
-			<div id="detail-collapse" class="settings collapse">
-				<p>
-					<select id="visual_mode" class="form-control">
-						<option value="normal">Normal mode</option>
-						<option value="concentration" selected>Concentration mode
-						</option>
-					</select>
-				</p>
-				<p>
-					<select id="study_mode" class="form-control">
-						<option value="test">Test</option>
-						<option value="memorization" selected>Memorization</option>
-					</select>
-				</p>
-                <p>
-                    <select id="target_step" class="form-control">
-                        <option value="all">1~19 paragraph</option>
-                        <option value="two_for" selected>2~19 paragraph</option>
-                        <option value="eleven_for">12~19 paragraph</option>
-                        <option value="choses">choses paragraph</option>
+    <div id="contents">
+        <div id="content-top"></div>
+        <div id="multiplication_content">
+            <div class="progress">
+                <div id="calculate-progress" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"
+                style="width: 0%">
+                    <span class="sr-only"></span>
+                </div>
+            </div>
+            <table class="culculate_area">
+                <tr valign="middle">
+                    <td>
+                        <div id="number1" class="number digit-3">X</div>
+                    </td>
+                    <td>
+                        <div class="operator">×</div>
+                    </td>
+                    <td>
+                        <div id="number2" class="number digit-3">Y</div>
+                    </td>
+                    <td>
+                        <div class="operator">＝</div>
+                    </td>
+                    <td>
+                        <div id="result" class="number digit-3">Z</div>
+                    </td>
+                </tr>
+            </table>
+            <p>
+                <label id="number_of_steps">Selected Type!!</label>
+            </p>
+            <p>
+                <button id="control_btn" class="btn btn-primary btn-block" onclick="ButtonTypeJudge()">Start</button>
+            </p>
+            <br/>
+            <button type="button" id="basic-btn" class="btn btn-info btn-block" data-toggle="collapse" data-target="#basic-collapse">Basic</button>
+            <div id="basic-collapse" class="settings collapse">
+                    <input type="checkbox" name="study_mode"><span class="label label-info">Test mode</span>
+                    <select id="x_target_step" class="form-control">
+                        <option value="all">X:1~19</option>
+                        <option value="eleven_for" selected>X:10~19</option>
+                        <option value="eleven_under">X:1~9</option>
+                        <option value="choses">X free choses</option>
                         <option value="test">※Test※</option>
                     </select>
-                </p>
-				<p>
-				<div id="choses_paragraphs" class="form-group"></div>
-				<p>
-				<p>
-					<select id="display_second" class="form-control">
-						<option value="2000">2 second</option>
-						<option value="1500" selected>1.5 second</option>
-						<option value="1000">1 second</option>
-						<option value="500">0.5 second</option>
-						<option value="300">0.3 second</option>
-					</select>
-				</p>
-				<p>
-					<select id="char_mode" class="form-control">
-						<option value="flat">Flat</option>
-						<option value="dinamic-emphasis" selected>Dynamic only
-							emphasis</option>
-						<option value="emphasis">Emphasis</option>
-					</select>
-				</p>
-			</div>
-		</div>
-	</div>
-	<script type="text/javascript">
-        commonInit();
+                <div id="x_exclude_paragraphs" class="[ form-group ]">
+                    <div class="info-block block-info clearfix">
+                    </div>
+                </div>
+                <div id="x_choses_paragraphs" class="[ form-group ]">
+                    <div class="info-block block-info clearfix">
+                    </div>
+                </div>
 
+                <select id="y_target_step" class="form-control">
+                    <option value="all">Y:1~19</option>
+                    <option value="eleven_for" selected>Y:10~19</option>
+                    <option value="eleven_under">Y:1~9</option>
+                    <option value="choses">Y free choses</option>
+                    <option value="test">※Test※</option>
+                </select>
+                <div id="y_exclude_paragraphs" class="[ form-group ]">
+                    <div class="info-block block-info clearfix">
+                    </div>
+                </div>
+                <div id="y_choses_paragraphs" class="[ form-group ]">
+                    <div class="info-block block-info clearfix">
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <button type="button" id="detail-btn" class="btn btn-info btn-block" data-toggle="collapse" data-target="#detail-collapse">Detail settings</button>
+            <div id="detail-collapse" class="settings collapse">
+                <p>
+                    <input type="checkbox" name="visual_mode" checked><span class="label label-info">Concentration mode</span>
+                </p>
+                <p>
+                    <select id="display_second" class="form-control">
+                        <option value="2000">2 second</option>
+                        <option value="1500" selected>1.5 second</option>
+                        <option value="1000">1 second</option>
+                        <option value="500">0.5 second</option>
+                        <option value="300">0.3 second</option>
+                    </select>
+                </p>
+                <p>
+                    <select id="char_mode" class="form-control">
+                        <option value="flat">Flat</option>
+                        <option value="dinamic-emphasis" selected>Dynamic only emphasis</option>
+                        <option value="emphasis">Emphasis</option>
+                    </select>
+                </p>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        commonInit();
+        
         function commonInit() {
             jQuery.fn.center = function() {
                 this.css("position", "absolute");
@@ -116,26 +126,45 @@
             };
             $("#contents").center();
 
-            makeNumberCheckbox(2, 19, '#choses_paragraphs');
+            makeNumberCheckbox(1, $('#x_exclude_paragraphs').children());
+            makeNumberCheckbox(10, $('#x_exclude_paragraphs').children());
+            makeNumberCheckboxs(1, 19, $('#x_choses_paragraphs').children());
 
+            makeNumberCheckbox(1, $('#y_exclude_paragraphs').children());
+            makeNumberCheckbox(10, $('#y_exclude_paragraphs').children());
+            makeNumberCheckboxs(1, 19, $('#y_choses_paragraphs').children());
+
+            bootstrapInit();
             multiInit();
         }
-
+        
+        function bootstrapInit(){
+          $("[name='study_mode']").bootstrapSwitch();
+          $("[name='visual_mode']").bootstrapSwitch();
+        }
+        
         function multiInit() {
             $('#content-top').after($('#multiplication_content'));
-
             selectSetting();
             $("select#char_mode").change();
-            $("select#target_step").change();
+            $("select#x_target_step").change();
+            $("select#y_target_step").change();
+            
+            var parentElement = $('#x_exclude_paragraphs .bizcontent input[type="checkbox"]');
+            changeNumbers(parentElement, ["1", "10"]);
 
+            parentElement = $('#y_exclude_paragraphs .bizcontent input[type="checkbox"]');
+            changeNumbers(parentElement, ["1", "10"]);
+            
             multiReset();
+
+            $('#detail-collapse').collapse('hide');
         }
 
         function selectSetting() {
             $("select#char_mode").change(function() {
                 $("select#char_mode option:selected").each(function() {
                     var mode = $(this).val();
-
                     if (mode === 'flat') {
                         changeCharEmpasis('#number1', 'emphasis-1');
                         changeCharEmpasis('#number2', 'emphasis-1');
@@ -153,81 +182,94 @@
                     }
                 });
             });
+            $("select#x_target_step").change(function() {
+                $("select#x_target_step option:selected").each(function() {
+                    var mode = $(this).val();
 
-            $("select#target_step")
-                    .change(
-                            function() {
-                                $("select#target_step option:selected")
-                                        .each(
-                                                function() {
-                                                    var mode = $(this).val();
+                    var parentElement = $('#x_choses_paragraphs .bizcontent input[type="checkbox"]');
+                    if (mode === 'all') {
+                        changeNumbers(parentElement, ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]);
+                    } else if (mode === 'eleven_for') {
+                        changeNumbers(parentElement, ["10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]);
+                    } else if (mode === 'eleven_under') {
+                        changeNumbers(parentElement, ["1", "2", "3", "4", "5", "6", "7", "8", "9"]);
+                    } else if (mode === 'choses') {
+                        changeNumbers(parentElement, []);
+                    } else if (mode === 'test') {
+                        changeNumbers(parentElement, ["2", "3"]);
+                    }
+                });
+            });
 
-                                                    if (mode === 'choses') {
-                                                        $("#choses_paragraphs")
-                                                                .show();
-                                                    } else {
-                                                        $("#choses_paragraphs")
-                                                                .hide();
-                                                        $(
-                                                                '#choses_paragraphs .checkbox-inline input[type="checkbox"]')
-                                                                .prop(
-                                                                        'checked',
-                                                                        false);
-                                                    }
-                                                });
-                            });
+            $("select#y_target_step").change(function() {
+                $("select#y_target_step option:selected").each(function() {
+                    var mode = $(this).val();
+
+                    var parentElement = $('#y_choses_paragraphs .bizcontent input[type="checkbox"]');
+                    if (mode === 'all') {
+                        changeNumbers(parentElement, ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]);
+                    } else if (mode === 'eleven_for') {
+                        changeNumbers(parentElement, ["10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]);
+                    } else if (mode === 'eleven_under') {
+                        changeNumbers(parentElement, ["1", "2", "3", "4", "5", "6", "7", "8", "9"]);
+                    } else if (mode === 'choses') {
+                        changeNumbers(parentElement, []);
+                    } else if (mode === 'test') {
+                        changeNumbers(parentElement, ["2", "3"]);
+                    }
+                });
+            });
         }
-
+        function changeNumbers(parentElement, targets) {
+            parentElement.each(function(){
+                var number = $(this).val();
+                if(targets.indexOf(number) > -1){
+                    $(this).parent().parent().addClass('active');
+                } else {
+                    $(this).parent().parent().removeClass('active');
+                }
+            });
+        }
         function changeCharEmpasis(idOrClass, addClass) {
             $(idOrClass).removeClass('no-emphasis');
             $(idOrClass).removeClass('emphasis-1');
             $(idOrClass).removeClass('emphasis-2');
             $(idOrClass).removeClass('emphasis-3');
-
             $(idOrClass).addClass(addClass);
         }
-
         function calculateStop() {
             countTicker.exit();
             numberTicker.exit();
-
             multiReset();
         }
-
         function multiReset() {
             $('#number_of_steps').text('Selected Type!!');
-
-            if ($('#visual_mode').val() == 'concentration') {
+            if ($("[name='visual_mode']").is(":checked")) {
                 switchVisual(true);
             }
-
             $('#control_btn').text('Start');
             type = 'start';
         }
-
         function switchVisual(flag) {
             if (flag) {
                 $('.progress').removeClass('disable-background-color');
                 $('#calculate-progress')
                         .removeClass('disable-background-color');
-
                 $('#control_btn').removeClass('disable-background-color');
-                $('#detail-btn').removeClass('disable-background-color');
-                $('#detail-btn').removeClass('disable-font-color');
-
+                $('#basic-btn').removeClass('disable-background-color disable-font-color disable-border');
+                $('#basic-collapse').collapse('show');
+                $('#detail-btn').removeClass('disable-background-color disable-font-color disable-border');
                 $('#detail-collapse').collapse('show');
             } else {
                 $('.progress').addClass('disable-background-color');
                 $('#calculate-progress').addClass('disable-background-color');
-
                 $('#control_btn').addClass('disable-background-color');
-                $('#detail-btn').addClass('disable-background-color');
-                $('#detail-btn').addClass('disable-font-color');
-
+                $('#basic-btn').addClass('disable-background-color disable-font-color disable-border');
+                $('#basic-collapse').collapse('hide');
+                $('#detail-btn').addClass('disable-background-color disable-font-color disable-border');
                 $('#detail-collapse').collapse('hide');
             }
         }
-
         var type = 'start'; // or stop
         function ButtonTypeJudge() {
             if (type === 'start') {
@@ -236,76 +278,56 @@
                 calculateStop();
             }
         }
-
+        
         var countTicker = new Ticker();
         var numberTicker = new Ticker();
-
         function calculateStart() {
-            var targetStep = $('#target_step').val();
+            var parentElement = $('#x_choses_paragraphs .btn');
+            var xTargetNumbers = [];
+            parentElement.each(function(){
+                if($(this).hasClass('active')){
+                    xTargetNumbers.push($(this).find('[name="var_id[]"]').val());
+                }
+            });
 
-            var studyMode = $('#study_mode').val() == 'test' ? true : false;
+            parentElement = $('#y_choses_paragraphs .btn');
+            var yTargetNumbers = [];
+            parentElement.each(function(){
+                if($(this).hasClass('active')){
+                    yTargetNumbers.push($(this).find('[name="var_id[]"]').val());
+                }
+            });
 
-            var targetSteps = [];
-            if (targetStep === 'all') {
-                targetSteps = makeSteps_(1, 19, 1, 19, false, studyMode);
-            } else if (targetStep === 'eleven_for') {
-                targetSteps = makeSteps_(11, 19, 11, 19, false, studyMode);
-            } else if (targetStep === 'two_for') {
-                targetSteps = makeSteps_(2, 19, 11, 19, true, studyMode);
-            } else if (targetStep === 'choses') {
-                $('#choses_paragraphs :checked').each(
-                        function() {
-                            var step = $(this).val();
-                            Array.prototype.push.apply(targetSteps, makeSteps_(
-                                    step, step, 2, 19, true, studyMode));
-                        });
-            } else if (targetStep === 'test') {
-                targetSteps = makeSteps_(1, 2, 1, 2, false, studyMode);
-            } else {
-                alert("hasn't exist step was selected");
-                return;
-            }
+            var studyMode = $("[name='study_mode']").is(":checked");
+            var targetSteps = makeSteps_(xTargetNumbers, yTargetNumbers, studyMode);
 
             $('#control_btn').text('Stop');
-
             type = 'stop';
-
-            $('#number1').text('000');
-            $('#number2').text('000');
-            $('#result').text('000');
-
+            $('#number1').text('X');
+            $('#number2').text('Y');
+            $('#result').text('Z');
             $('#calculate-progress').attr('aria-valuemax', targetSteps.length);
             $('#calculate-progress').attr('aria-valuenow', '0');
             $('#calculate-progress').css('width', '0%');
-
-            if ($('#visual_mode').val() == 'concentration') {
+            if ($("[name='visual_mode']").is(":checked")) {
                 switchVisual(false);
             }
-
             $('#number_of_steps').text('3');
-
             countTicker = new Ticker();
-
             countTicker.intervalFor(function(count) {
                 $('#number_of_steps').text(3 - count);
             }, 3);
-
             countTicker.run(function() {
                 $('#number_of_steps').text('\u00a0');
-
                 numberTicker = new Ticker();
-
                 numberTicker.interval = $('#display_second').val();
-
                 numberTicker.intervalFor(
                         function(count) {
                             try {
                                 var targetStep = targetSteps[count - 1];
-
                                 $('#number1').text(targetStep[0]);
                                 $('#number2').text(targetStep[1]);
                                 $('#result').text(targetStep[2]);
-
                                 $('#calculate-progress').attr('aria-valuenow',
                                         (count));
                                 $('#calculate-progress').css(
@@ -316,72 +338,60 @@
                                 //nothing
                             }
                         }, targetSteps.length);
-
                 numberTicker.run(function() {
                     multiReset();
-
-                    $('#number_of_steps').text('Finish!');
+                    $('#number_of_steps').text('Finish');
                 }, true);
-
             });
         }
-
-        function makeNumberCheckbox(min, max, element) {
-            var parent = $(element);
+        
+        function makeNumberCheckboxs(min, max, parent) {
             for (var i = min; i <= max; i++) {
-                parent
-                        .append('<label class="checkbox-inline"><input type="checkbox" value="' + i + '">'
-                                + i + '</label>');
+                makeNumberCheckbox(i, parent);
             }
         }
-
-        function makeSteps_(stepMin, stepMax, columnMin, columnMax,
-                oneExclusionFlag, testFlag) {
+        
+        function makeNumberCheckbox(value, parent) {
+            parent.append('<div data-toggle="buttons" class="btn-group bizmoduleselect"><label class="btn btn-default"><div class="bizcontent"><input type="checkbox" name="var_id[]" value="' + value + '" autocomplete="off"><span class="glyphicon glyphicon-ok glyphicon-lg"></span><h5>' + value + '</h5></div></label></div>');
+        }
+        
+        function makeSteps_(xs, ys, testFlag) {
             var gathers = [];
-            for (var i = stepMin; i <= stepMax; i++) {
-                if (oneExclusionFlag && (i == 1 || i == 10))
-                    continue;
-                for (var j = columnMin; j <= columnMax; j++) {
-                    if (oneExclusionFlag && (j == 1 || j == 10))
-                        continue;
-
+            for (var i = 0; i < xs.length; i++) {
+                var x = xs[i];
+                for (var j = 0; j < ys.length; j++) {
+                    var y = ys[j];
                     if (testFlag) {
                         var pair = [];
-                        pair.push(i);
-                        pair.push(j);
+                        pair.push(x);
+                        pair.push(y);
                         pair.push('');
-
                         gathers.push(pair);
-
                         pair = [];
-                        pair.push(i);
-                        pair.push(j);
-                        pair.push(i * j);
-
+                        pair.push(x);
+                        pair.push(y);
+                        pair.push(x * y);
                         gathers.push(pair);
                     } else {
                         var pair = [];
-                        pair.push(i);
-                        pair.push(j);
-                        pair.push(i * j);
-
+                        pair.push(x);
+                        pair.push(y);
+                        pair.push(x * y);
                         gathers.push(pair);
                     }
                 }
             }
             return gathers;
         }
-
+        
         function spaceFill(target, digit) {
             var different = digit - target.toString().length;
             if (different <= 0) {
                 return target;
             }
-
             for (var i = 0; i < different; i++) {
                 target = '\u00a0' + target.toString();
             }
-
             return target;
         }
     </script>
