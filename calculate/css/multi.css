@@ -79,6 +79,10 @@ label.btn-default{
     border-right: 1px solid #FFF;
 }
 
+#multiplication_content .collapse .last-panel{
+    border-bottom: 1px solid #FFF;
+}
+
 #multiplication_content .btn-group {
     width: 85px;
 }
@@ -101,4 +105,12 @@ label.btn-default{
 
 #multiplication_content .disable-border {
     border: 0px;
+}
+
+#secondSlider.slider.slider-horizontal {
+	width: 70%;
+}
+
+#secondSlider .slider-selection {
+	background: #BABABA;
 }

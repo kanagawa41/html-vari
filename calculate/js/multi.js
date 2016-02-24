@@ -22,6 +22,7 @@ function bootstrapInit() {
 function multiInit() {
 	$('#content-top').after($('#multiplication_content'));
 
+	sliderSetting();
 	toggleSetting();
 	remakeNumberCheckboxs();
 
@@ -33,6 +34,15 @@ function multiInit() {
 	multiReset();
 
 	$('#detail-collapse').collapse('hide');
+}
+
+function sliderSetting(){
+	$('#display_second').slider({
+		tooltip: 'always',
+		formatter: function(value) {
+			return value + ' second';
+		}
+	});
 }
 
 function toggleSetting() {
@@ -214,7 +224,7 @@ function calculateStart() {
 	countTicker.run(function () {
 		$('#number_of_steps').text('\u00a0');
 		numberTicker = new Ticker();
-		numberTicker.interval = $('#display_second').val();
+		numberTicker.interval = $('#display_second').val() * 1000;
 		numberTicker.intervalFor(
 			function (count) {
 				try {
