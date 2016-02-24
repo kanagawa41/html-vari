@@ -28,7 +28,7 @@ label.btn-default{
 }
 
 #multiplication_content .culculate_area {
-    height: 200px;
+    height: 230px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -38,15 +38,15 @@ label.btn-default{
 }
 
 #multiplication_content .emphasis-1 {
-    font-size: 3.5em;
-}
-
-#multiplication_content .emphasis-2 {
     font-size: 5.5em;
 }
 
+#multiplication_content .emphasis-2 {
+    font-size: 8.5em;
+}
+
 #multiplication_content .emphasis-3 {
-    font-size: 8em;
+    font-size: 13em;
 }
 
 #multiplication_content .digit-3 {
@@ -72,6 +72,19 @@ label.btn-default{
 }
 
 #multiplication_content .collapse {
+}
+
+#multiplication_content .collapse .panel-body{
+    border-left: 1px solid #FFF;
+    border-right: 1px solid #FFF;
+}
+
+#multiplication_content .btn-group {
+    width: 85px;
+}
+
+#multiplication_content .toggle-label {
+    margin-left: 10px;
 }
 
 #multiplication_content .checkbox-inline {
