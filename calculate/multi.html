@@ -6,6 +6,7 @@
   <title>Enjoy calculate</title>
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="js/jquery.cookie.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="js/bootstrap/bootstrap.min.js"></script>
   <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -51,7 +52,7 @@
       <p>
         <label id="number_of_steps"></label>
       </p>
-      <button id="control_btn" class="btn btn-primary btn-block" onclick="ButtonTypeJudge()">Start</button>
+      <button id="control_btn" class="btn btn-primary btn-block glyphicon glyphicon-play" onclick="ButtonTypeJudge()">Start</button>
       <br/>
       <br/>
       <button type="button" id="basic-btn" class="btn btn-info btn-block" data-toggle="collapse" data-target="#basic-collapse">
@@ -107,7 +108,17 @@
           </h3>
           <br/>
           <br/>
-          <input id="display_second" data-slider-id='secondSlider' type="text" data-slider-min="0.1" data-slider-max="3" data-slider-step="0.1" data-slider-value="1.5"/>
+          <div class="slider-component">
+            <input id="display_second" data-slider-id='secondSlider'  data-slider-ticks="[0.1, 0.5, 1.5, 1, 2, 3]" data-slider-ticks-snap-bounds="30" type="text" data-slider-min="0.1" data-slider-max="3" data-slider-step="0.1" data-slider-value="1.5"/>
+          </div>
+          <div class="slider-labels">
+              <span class="label label-default">0.1</span>
+              <span class="label label-default adjust" style="margin-left: 52px">0.5</span>
+              <span class="label label-default adjust" style="margin-left: 72px">1.0</span>
+              <span class="label label-default adjust" style="margin-left: 72px">1.5</span>
+              <span class="label label-default adjust" style="margin-left: 72px">2.0</span>
+              <span class="label label-default adjust" style="margin-left: 175px">3.0</span>
+          </div>
           <h3>
             <span class="label label-info toggle-label">char display state</span>
           </h3>

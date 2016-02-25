@@ -101,6 +101,8 @@ label.btn-default{
 
 #multiplication_content .disable-background-color {
     background-color: rgba(0, 0, 255, 0);
+    border-color: rgba(0, 0, 255, 0);
+    outline:none;
 }
 
 #multiplication_content .disable-border {
@@ -111,6 +113,16 @@ label.btn-default{
 	width: 70%;
 }
 
+.slider-component {
+    padding-left: 15px;
+}
+.slider-labels span.adjust{
+    margin-left: 54px;
+}
 #secondSlider .slider-selection {
+	background: #BABABA;
+}
+
+#secondSlider .slider-tick-label {
 	background: #BABABA;
 }

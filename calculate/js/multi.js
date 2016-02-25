@@ -34,6 +34,8 @@ function multiInit() {
 	multiReset();
 
 	$('#detail-collapse').collapse('hide');
+
+	$('#number_of_steps').text('Let\'s calculate!');
 }
 
 function sliderSetting(){
@@ -147,10 +149,11 @@ function calculateStop() {
 	multiReset();
 }
 function multiReset() {
-	$('#number_of_steps').text('Let\'s calculate!');
 	if ($("[name='visual_mode']").is(":checked")) {
 		switchVisual(true);
 	}
+	$('#control_btn').removeClass('glyphicon-pause');
+	$('#control_btn').addClass('glyphicon-play');
 	$('#control_btn').text('Start');
 	type = 'start';
 }
@@ -205,6 +208,8 @@ function calculateStart() {
 	var studyMode = $("[name='study_mode']").is(":checked");
 	var targetSteps = makeSteps_(xTargetNumbers, yTargetNumbers, studyMode);
 
+	$('#control_btn').removeClass('glyphicon-play');
+	$('#control_btn').addClass('glyphicon-pause');
 	$('#control_btn').text('Stop');
 	type = 'stop';
 	$('#number1').text('X');
@@ -244,9 +249,35 @@ function calculateStart() {
 			}, targetSteps.length);
 		numberTicker.run(function () {
 			multiReset();
-			$('#number_of_steps').text('Finish');
+			var count = $.cookie('count') != null ? parseInt($.cookie('count')) : 0;
+			$.cookie('count', count + 1);
+
+			$('#number_of_steps').text(getMessage(count + 1));
 		}, true);
 	});
+}
+
+var MESSAGES = {
+	'1': '疑わずに最初の一段を登りなさい。階段のすべて見えなくてもいい。とにかく最初の一歩を踏み出すのです。'
+	, '5': 'あなたにできること、あるいはできると夢見ていることがあれば、今すぐ始めなさい。向こう見ずは天才であり、力であり、魔法です。'
+	, '10': 'じっくり考えろ。しかし、行動する時が来たなら、考えるのをやめて、進め。'
+	, '20': '人生はどちらかです。勇気をもって挑むか、棒にふるか。'
+	, '30': '成功があがりでもなければ、失敗が終わりでもない。肝心なのは、続ける勇気である。'
+	, '40': '大きな失敗を恐れない者だけが、偉大なことを成し遂げる。'
+	, '50': '何事も成功するまでは不可能に思えるものである。'
+	, '60': 'どんな人間も、自分が思っている以上のことができる。'
+	, '70': '強さとは、身体能力ではなく、不屈の精神から生まれるものだ。'
+	, '80': '終始一貫、勇気勇気で押し切るのだ。'
+	, '90': '今の状況がどれほど苦しく、救いのないものに思えても、それを変える道が必ずあることを分かってほしい。'
+	, '100': 'すべては過程だ。結果ではない。'
+};
+
+function getMessage(count){
+	var message = MESSAGES[count.toString()];
+
+	if(message == null) return "Let's retry!";
+
+	return message;
 }
 
 function makeNumberCheckboxs(min, max, expects, parent) {
