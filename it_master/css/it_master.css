@@ -1,0 +1,32 @@
+/** base **/
+.body-content {
+    max-width: 900px;
+    max-height: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    height: 40%;
+    padding-top: 40px;
+}
+
+#title, #detail {
+  color: #ffff00;
+}
+
+#title {
+    font-size: 3em;
+}
+
+#detail {
+    font-size: 1.2em;
+}
+
+.disable-font-color {
+    color: rgba(0, 0, 255, 0);
+}
+
+.disable-background-color {
+    background-color: rgba(0, 0, 255, 0);
+    border-color: rgba(0, 0, 255, 0);
+    outline:none;
+}
