@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>index.html</title>
+</head>
+<body>
+    Message:<label id="message-count">0</label><br/>
+    Open:<label id="open-count">0</label><br/>
+    Close:<label id="close-count">0</label><br/>
+    Failed:<label id="failed-count">0</label><br/>
+    Failed(%):<label id="failed-percent">0</label>%<br/>
+    <ul id="eventList">
+    </ul>
+    <script>
+        var es = new EventSource('api.php?room=1234');
+
+        es.addEventListener('room', function (event) {
+            console.log(event.data);
+
+            var newElement = document.createElement("li");
+            var eventList = document.getElementById('eventList');
+
+            newElement.innerHTML = "room-message: " + event.data;
+            eventList.appendChild(newElement);
+        });
+
+        es.addEventListener('ping', function (event) {
+            console.log(event.data);
+
+            var newElement = document.createElement("li");
+            var eventList = document.getElementById('eventList');
+
+            newElement.innerHTML = "ping-message: " + event.data;
+            eventList.appendChild(newElement);
+
+            var count = document.getElementById('message-count').innerHTML;
+            count = parseInt(count) + 1;
+            document.getElementById('message-count').innerHTML = count;
+
+            percent = parseInt(document.getElementById('failed-count').innerHTML) / parseInt(document.getElementById('message-count').innerHTML) * 100;
+            document.getElementById('failed-percent').innerHTML = percent.toFixed(0);
+        });
+
+        es.addEventListener('count', function (event) {
+            console.log(event.data);
+
+            var newElement = document.createElement("li");
+            var eventList = document.getElementById('eventList');
+
+            newElement.innerHTML = "message-message: " + event.data;
+            eventList.appendChild(newElement);
+        });
+
+		es.onopen = function() {
+		  console.log('Opened connection ');
+		  
+          var newElement = document.createElement("li");
+          var eventList = document.getElementById('eventList');
+
+          newElement.innerHTML = "open-message: Opened connection";
+          eventList.appendChild(newElement);
+
+          var count = document.getElementById('open-count').innerHTML;
+          count = parseInt(count) + 1;
+          document.getElementById('open-count').innerHTML = count;
+		};
+
+		es.onclose = function(code, reason) {
+		  console.log(code, reason);
+
+          var newElement = document.createElement("li");
+          var eventList = document.getElementById('eventList');
+
+          newElement.innerHTML = "close-message: " + code + " " + reason;
+          eventList.appendChild(newElement);
+
+          var count = document.getElementById('close-count').innerHTML;
+          count = parseInt(count) + 1;
+          document.getElementById('close-count').innerHTML = count;
+		}
+
+        es.onerror = function(e) {
+			console.log("EventSource failed.");
+
+		    if (e.readyState === EventSource.CONNECTING) { // === 0 
+			  console.log("çƒê⁄ë±íÜ");
+		    } else if (e.readyState === EventSource.OPEN) { // === 1
+			  console.log("ê⁄ë±íÜ");
+		    } else if (e.readyState === EventSource.CLOSED) { // === 2
+			  console.log("èIóπ");
+		    } else {
+			  console.log(e.readyState);
+		    }
+
+            var newElement = document.createElement("li");
+            var eventList = document.getElementById('eventList');
+
+            newElement.innerHTML = "error-message: EventSource failed.";
+            eventList.appendChild(newElement);
+
+            var count = document.getElementById('failed-count').innerHTML;
+            count = parseInt(count) + 1;
+            document.getElementById('failed-count').innerHTML = count;
+
+            percent = parseInt(document.getElementById('failed-count').innerHTML) / parseInt(document.getElementById('message-count').innerHTML) * 100;
+            document.getElementById('failed-percent').innerHTML = percent.toFixed(0);
+		};
+    </script>
+</body>
+</html>
