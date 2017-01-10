@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Storage Sample</title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="store.min.js"></script>
+<script src="message-history.js"></script>
+
+<script type="text/javascript">
+$(function () {
+	
+
+    init()
+    function init() {
+		console.log(MessageHistory.getMessages().length);
+		console.log(JSON.stringify(MessageHistory.getMessages()));
+		MessageHistory.prepend({ name: 'prepend', likes: '123' });
+		MessageHistory.append({ name: 'append', likes: '123' });
+		console.log(MessageHistory.getHeadMessage('name'));
+		console.log(MessageHistory.getBackMessage('name'));
+/*        
+		// Store 'marcus' at 'username'
+		store.set('username', 'marcus');
+
+		// Get 'username'
+		store.get('username');
+
+		// Remove 'username'
+		store.remove('username');
+
+		// Clear all keys
+		store.clear();
+
+		// Store an object literal - store.js uses JSON.stringify under the hood
+		store.set('user', { name: 'marcus', likes: 'javascript' })
+
+		// Update existing value
+		store.transact('user', function(value) {
+		    value.dislikes = 'java';
+		})
+
+		// Get the stored object - store.js uses JSON.parse under the hood
+		var user = store.get('user');
+		alert(user.name + ' likes ' + user.likes);
+
+		// Get all stored values
+		store.getAll().user.name == 'marcus';
+
+		// Loop over all stored values
+		store.forEach(function(key, val) {
+		    console.log(key, '==', val)
+		});
+*/
+	}
+});
+</script>
+</head>
+<body>
+</body>
+</html>
