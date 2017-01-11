@@ -11,10 +11,6 @@ MessageHistory: {
     	if(!storeMessageCount){
 	    	STORE_MESSAGE_COUNT = storeMessageCount; // 保持数を設定する
 		}
-		
-        if (!store.enabled) {
-            console.log('Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser.');
-        }
     }
 
     // prototype をローカル変数へ
@@ -24,37 +20,41 @@ MessageHistory: {
 	var STORE_KEY = 'message_history';
 
     // 保持するメッセージ数
-	var STORE_MESSAGE_COUNT = 20;
+	var STORE_MESSAGE_COUNT = 1000;
 
     /**
-     * 前方のメッセージを取得する
+     * メッセージ数を取得する
      */
-    MessageHistory.getHeadMessage = function (){
+    MessageHistory.countMessage = function (){
         var messages = store.get(STORE_KEY);
         
-        if(!messages || messages.length == 0){
-        	return null;
-        }
-        
-        return messages.slice(0, 1);
+        return messages ? messages.length : 0;
 	}
 
     /**
-     * 後方のメッセージを取得する
+     * 最も古いメッセージを返却する。
+     * [0,1,2,3,4]の場合は、0が返却される。
      */
-    MessageHistory.getBackMessage = function (){
+    MessageHistory.getOldestMessage = function (){
         var messages = store.get(STORE_KEY);
         
-        if(!messages || messages.length == 0){
-        	return null;
-        }
+        return !messages || messages.length == 0 ? null : messages.slice(0, 1);
+	}
+
+    /**
+     * 新しいメッセージを返却する。
+     * [0,1,2,3,4]の場合は、4が返却される。
+     */
+    MessageHistory.getRecentMessage = function (){
+        var messages = store.get(STORE_KEY);
         
-        return messages.slice(-1);
+        return !messages || messages.length == 0 ? null : messages.slice(-1);
 	}
 	
     /**
-     * メッセージを前方に追加する。
+     * メッセージを配列の前方に追加する。
      * もしメッセージが規定値以上の場合は追加しない。
+     * [0,1,2,3,4]で5を追加する場合は、[5,0,1,2,3,4]となる。
      * 引数はメッセージ配列
      */
     MessageHistory.prepend = function (message){
@@ -64,16 +64,16 @@ MessageHistory: {
         	messages = [];
         }
 
-        if(messages.length < STORE_MESSAGE_COUNT){ // メッセージが指定数を超過
-            return;
-        }
+		// メッセージが指定数を超過
+        if(messages.length > STORE_MESSAGE_COUNT){ return; }
 
     	messages.unshift(message);
         store.set(STORE_KEY, messages);
     }
 
     /**
-     * メッセージを後方に追加する。
+     * メッセージを配列の後方に追加する。
+     * [0,1,2,3,4]で5を追加する場合は、[0,1,2,3,4,5]となる。
      * 引数はメッセージ配列
      */
     MessageHistory.append = function (message){
@@ -91,6 +91,62 @@ MessageHistory: {
         }
 
         store.set(STORE_KEY, messages);
+    }
+
+    /**
+     * 指定のmessage_idより過去のメッセージを指定個数分取得する。
+     * [0,1,2,3,4]で3から2つの場合は、[1,2]が返却される。
+     */
+    MessageHistory.findMessage = function (message_id){
+        var messages = store.get(STORE_KEY);
+        
+        if(!messages){
+        	return null;
+        }
+
+		messages.reverse(); // [1,2,3,4,5]→[5,4,3,2,1]
+		
+		var targetMessage = null;
+		$.each(messages, function(key, val) {
+			if(val.message_id == message_id){
+				targetMessage = val;
+				return false;
+			}
+		});
+
+        if(!targetMessage){ return null; }
+        
+        return targetMessage;
+    }
+
+    /**
+     * 指定のmessage_idより過去のメッセージを指定個数分取得する。
+     * [0,1,2,3,4]で指定message_idが3、個数は2の場合は、[1,2]が返却される。
+     */
+    MessageHistory.findPastMessage = function (message_id, count){
+        var messages = store.get(STORE_KEY);
+        
+        if(!messages){
+        	return null;
+        }
+
+		messages.reverse(); // [1,2,3,4,5]→[5,4,3,2,1]
+		
+		var messageIndex = null;
+		$.each(messages, function(key, val) {
+			if(val.message_id == message_id){
+				messageIndex = key;
+				return false;
+			}
+		});
+
+        if(!messageIndex){ return null; }
+
+		var beginPosition = messageIndex + 1;
+		var endPosition = (messageIndex + 1) + count;
+
+		//モトの順番に戻し返却する。
+		return messages.slice(beginPosition, endPosition).reverse();
     }
 
     /**

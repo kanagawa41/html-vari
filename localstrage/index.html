@@ -10,15 +10,19 @@
 <script type="text/javascript">
 $(function () {
 	
-
-    init()
+	//MessageHistory.resetMessages();
+    init();
     function init() {
-		console.log(MessageHistory.getMessages().length);
-		console.log(JSON.stringify(MessageHistory.getMessages()));
-		MessageHistory.prepend({ name: 'prepend', likes: '123' });
-		MessageHistory.append({ name: 'append', likes: '123' });
-		console.log(MessageHistory.getHeadMessage('name'));
-		console.log(MessageHistory.getBackMessage('name'));
+//		console.log(MessageHistory.getMessages().length);
+//		
+		var rand = Math.floor( Math.random() * 6000 );
+//		MessageHistory.prepend({ name: 'prepend', message_id: rand });
+		MessageHistory.append({ name: 'append', message_id: rand });
+
+		console.log(JSON.stringify(MessageHistory.getMessages().reverse()));
+
+		var pasts = MessageHistory.findPastMessage(4177, 3);
+		console.log(JSON.stringify(pasts));
 /*        
 		// Store 'marcus' at 'username'
 		store.set('username', 'marcus');
